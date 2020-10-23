@@ -1,0 +1,21 @@
+<Schema Namespace="EntityFramework.TestApp" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Model" p1:LazyLoadingEnabled="false">
+    <EntitySet Name="TestTables" EntityType="EntityFramework.TestApp.TestTable" />
+  </EntityContainer>
+  <EntityType Name="TestTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Enum1" Type="EntityFramework.TestApp.TestEnum" />
+    <Property Name="Enum2" Type="EntityFramework.TestApp.NativeEnum" />
+  </EntityType>
+  <EnumType Name="NativeEnum" IsFlags="false" UnderlyingType="Int32">
+    <Member Name="Start" Value="2" />
+    <Member Name="End" Value="3" />
+  </EnumType>
+  <EnumType Name="TestEnum" IsFlags="false" UnderlyingType="Int32" p4:ExternalTypeName="EntityFramework.External.TestEnum, EntityFramework.External, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" xmlns:p4="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+    <Member Name="First" Value="1" />
+    <Member Name="Second" Value="2" />
+  </EnumType>
+</Schema>

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net472</TargetFramework>
+		<SignAssembly>false</SignAssembly>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\EntityFramework.SqlServer\EntityFramework.SqlServer.csproj" />
+		<ProjectReference Include="..\..\src\EntityFramework\EntityFramework.csproj" />
+		<ProjectReference Include="..\EntityFramework.External\EntityFramework.External.csproj" />
+		<ProjectReference Include="..\EntityFramework.DB\EntityFramework.DB.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="OL.Core" Version="20.10.3108.4389" />
+	</ItemGroup>
+
+</Project>

@@ -2,13 +2,13 @@
 
 namespace System.Data.Entity.Core.Metadata.Edm
 {
-    using System.Data.Entity.Infrastructure.Annotations;
-    using System.Diagnostics;
+	using System.Data.Entity.Infrastructure.Annotations;
+	using System.Diagnostics;
 
-    // <summary>
-    // Class that contains all the constants for various schemas
-    // </summary>
-    internal static class XmlConstants
+	// <summary>
+	// Class that contains all the constants for various schemas
+	// </summary>
+	internal static class XmlConstants
     {
         internal const string CustomAnnotationNamespace = "http://schemas.microsoft.com/ado/2013/11/edm/customannotation";
         internal const string CustomAnnotationPrefix = CustomAnnotationNamespace + ":";
@@ -217,6 +217,7 @@ namespace System.Data.Entity.Core.Metadata.Edm
         internal const string PrimitiveTypeKindAttribute = "PrimitiveTypeKind";
         internal const string AggregateAttribute = "Aggregate";
         internal const string BuiltInAttribute = "BuiltIn";
+        internal const string ExternalTypeNameAttribute = "ExternalTypeName";
         internal const string NameAttribute = "Name";
         internal const string IgnoreFacetsAttribute = "IgnoreFacets";
         internal const string NiladicFunction = "NiladicFunction";

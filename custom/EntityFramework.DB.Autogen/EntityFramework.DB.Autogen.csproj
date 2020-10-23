@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+		<Configurations>Debug;Release</Configurations>
+		<RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+		<SignAssembly>false</SignAssembly>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="OL.EFToolkit.Metadata.Autogen" Version="20.10.3108.4389" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="..\EntityFramework.DB\Model.*" Visible="false" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\EntityFramework.External\EntityFramework.External.csproj" />
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildOdysseyTasks\MSBuild.Odyssey.Tasks.targets"/>
+	<Target Name="ProjectAfterBuild" AfterTargets="AfterBuild" Condition="'$(_AssemblyTimestampBeforeCompile)'!='$(_AssemblyTimestampAfterCompile)'">
+		<RunBuildTasks Assembly="$(TargetPath)" Files="@(EmbeddedResource)" />
+	</Target>
+</Project>

@@ -1,0 +1,13 @@
+<Schema Namespace="EntityFramework.TestApp.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EntityFrameworkTestAppStoreContainer">
+    <EntitySet Name="TestTable" EntityType="EntityFramework.TestApp.Store.TestTable" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="TestTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Enum1" Type="int" />
+    <Property Name="Enum2" Type="int" />
+  </EntityType>
+</Schema>

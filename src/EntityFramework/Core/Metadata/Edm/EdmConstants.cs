@@ -2,7 +2,7 @@
 
 namespace System.Data.Entity.Core.Metadata.Edm
 {
-    internal static class EdmConstants
+	internal static class EdmConstants
     {
         // Namespace for all the system types
         internal const string EdmNamespace = "Edm";
@@ -75,12 +75,12 @@ namespace System.Data.Entity.Core.Metadata.Edm
         internal const string ZeroToOne = "ZeroToOne";
         internal const string Many = "Many";
 
-        //Enum value of Parameter Mode 
+        //Enum value of Parameter Mode
         internal const string In = "In";
         internal const string Out = "Out";
         internal const string InOut = "InOut";
 
-        //Enum value of DeleteAction Mode 
+        //Enum value of DeleteAction Mode
         internal const string None = "None";
         internal const string Cascade = "Cascade";
 
@@ -193,6 +193,9 @@ namespace System.Data.Entity.Core.Metadata.Edm
         internal const string IsComposableFunctionAttribute = "IsComposable";
         internal const string CommandTextFunctionAttribute = "CommandText";
         internal const string StoreFunctionNameAttribute = "StoreFunctionNameAttribute";
+
+        // OtherContent Names
+        internal const string OtherContentExternalTypeName = XmlConstants.CodeGenerationSchemaNamespace + ":" + XmlConstants.ExternalTypeNameAttribute;
 
         // <summary>
         // Used to denote application home directory in a Web/ASP.NET context

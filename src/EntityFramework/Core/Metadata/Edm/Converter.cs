@@ -2,25 +2,25 @@
 
 namespace System.Data.Entity.Core.Metadata.Edm
 {
-    using System.Collections.Generic;
-    using System.Data.Entity.Core.Common;
-    using System.Data.Entity.Core.Metadata.Edm.Provider;
-    using System.Data.Entity.Core.Objects.DataClasses;
-    using System.Data.Entity.Core.SchemaObjectModel;
-    using System.Data.Entity.Utilities;
-    using System.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
-    using System.Linq;
+	using System.Collections.Generic;
+	using System.Data.Entity.Core.Common;
+	using System.Data.Entity.Core.Metadata.Edm.Provider;
+	using System.Data.Entity.Core.Objects.DataClasses;
+	using System.Data.Entity.Core.SchemaObjectModel;
+	using System.Data.Entity.Utilities;
+	using System.Diagnostics;
+	using System.Diagnostics.CodeAnalysis;
+	using System.Globalization;
+	using System.Linq;
 
-    // <summary>
-    // Helper Class for converting SOM objects to metadata objects
-    // This class should go away once we have completely integrated SOM and metadata
-    // </summary>
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
+	// <summary>
+	// Helper Class for converting SOM objects to metadata objects
+	// This class should go away once we have completely integrated SOM and metadata
+	// </summary>
+	[SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
     internal static class Converter
     {
-        // <summary>
+		// <summary>
         // Static constructor for creating FacetDescription objects that we use
         // </summary>
         [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
@@ -158,7 +158,7 @@ namespace System.Data.Entity.Core.Metadata.Edm
             else
             {
                 Debug.Assert(convertedItemCache.ItemCollection.DataSpace == DataSpace.SSpace, "Did you add a new space?");
-                // when converting the ProviderManifest, the DataSpace is SSpace, but the ItemCollection is EmptyItemCollection, 
+                // when converting the ProviderManifest, the DataSpace is SSpace, but the ItemCollection is EmptyItemCollection,
                 // not StoreItemCollection
                 var storeCollection = convertedItemCache.ItemCollection as StoreItemCollection;
                 if (storeCollection != null)
@@ -748,7 +748,7 @@ namespace System.Data.Entity.Core.Metadata.Edm
             EdmProperty property;
 
             // Get the appropriate type object for this type, for primitive and enum types, get the facet values for the type
-            // property as a type usage object as well                  
+            // property as a type usage object as well
             TypeUsage typeUsage = null;
 
             var scalarType = somProperty.Type as ScalarType;
@@ -971,7 +971,7 @@ namespace System.Data.Entity.Core.Metadata.Edm
                 if (null != returnType)
                 {
                     // Create the return parameter object, need to set the declaring type explicitly on the return parameter
-                    // because we aren't adding it to the members collection                    
+                    // because we aren't adding it to the members collection
                     returnParameters.Add(new FunctionParameter(EdmConstants.ReturnType, returnType, ParameterMode.ReturnValue));
                 }
                 else
@@ -1077,7 +1077,7 @@ namespace System.Data.Entity.Core.Metadata.Edm
                 newGlobalItems.Add(somFunction, function);
             }
 
-            //Check if we already converted functions since we are loading it from 
+            //Check if we already converted functions since we are loading it from
             //ssdl we could see functions many times.
             GlobalItem returnFunction = null;
             Debug.Assert(
@@ -1108,11 +1108,12 @@ namespace System.Data.Entity.Core.Metadata.Edm
                 "At this point the underlying type should have already been validated and should be ScalarType");
 
             var enumUnderlyingType = (ScalarType)somEnumType.UnderlyingType;
-
+            var externalTypeName   = somEnumType.OtherContent.FirstOrDefault(oc => oc.Name == EdmConstants.OtherContentExternalTypeName)?.Value as string;
+            var clrType            = externalTypeName == null ? default : Type.GetType(externalTypeName);
             // note that enums don't live in SSpace so there is no need to GetDataSpace() for it.
             var enumType = new EnumType(
-                somEnumType.Name,
-                somEnumType.Namespace,
+                clrType?.Name      ?? somEnumType.Name,
+                clrType?.Namespace ?? somEnumType.Namespace,
                 enumUnderlyingType.Type,
                 somEnumType.IsFlags,
                 DataSpace.CSpace);
@@ -1241,8 +1242,8 @@ namespace System.Data.Entity.Core.Metadata.Edm
                         convertedItemCache,
                         newGlobalItems);
 
-                    // Neither FunctionImport nor its Parameters can have facets when defined in CSDL so for enums, 
-                    // since they are only a CSpace concept, we need to process facets only on model functions 
+                    // Neither FunctionImport nor its Parameters can have facets when defined in CSDL so for enums,
+                    // since they are only a CSpace concept, we need to process facets only on model functions
                     if (isModelFunction && type is SchemaEnumType)
                     {
                         Debug.Assert(somFunction.Schema.DataModel == SchemaDataModelOption.EntityDataModel, "Enums live only in CSpace");

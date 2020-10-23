@@ -1,0 +1,13 @@
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntityFrameworkTestAppStoreContainer" CdmEntityContainer="Model">
+    <EntitySetMapping Name="TestTables">
+      <EntityTypeMapping TypeName="EntityFramework.TestApp.TestTable">
+        <MappingFragment StoreEntitySet="TestTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Enum1" ColumnName="Enum1" />
+          <ScalarProperty Name="Enum2" ColumnName="Enum2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
