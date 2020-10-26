@@ -14,7 +14,6 @@
     <NoWarn>$(NoWarn);NU5131</NoWarn>
     <!-- Temporary workaround - remove once https://github.com/dotnet/ef6/pull/1291 is merged -->
     <NoWarn>$(NoWarn);NU5048</NoWarn>
-	  <SignAssembly>false</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>

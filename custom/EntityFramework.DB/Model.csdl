@@ -14,7 +14,7 @@
     <Member Name="Start" Value="2" />
     <Member Name="End" Value="3" />
   </EnumType>
-  <EnumType Name="TestEnum" IsFlags="false" UnderlyingType="Int32" p4:ExternalTypeName="EntityFramework.External.TestEnum, EntityFramework.External, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" xmlns:p4="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+  <EnumType Name="TestEnum" IsFlags="false" UnderlyingType="Int32" p4:ExternalTypeName="EntityFramework.External.TestEnum, EntityFramework.DB.Autogen" xmlns:p4="http://schemas.microsoft.com/ado/2006/04/codegeneration">
     <Member Name="First" Value="1" />
     <Member Name="Second" Value="2" />
   </EnumType>

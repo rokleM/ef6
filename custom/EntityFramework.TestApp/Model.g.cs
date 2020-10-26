@@ -8,23 +8,25 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
 using System.Data.Entity.Core.EntityClient;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 namespace EntityFramework.TestApp
 {
-	using EntityFramework.External;
+    partial class Model { partial void LoadExternalTypes(){} }
 
-	#region Contexts
-
-	/// <summary>
-	/// No Metadata Documentation available.
-	/// </summary>
-	public partial class Model : ObjectContext
+#region _Contexts
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    public partial class Model : ObjectContext
     {
         #region Constructors
     
@@ -234,7 +236,7 @@ namespace EntityFramework.TestApp
     /// </summary>
     [EdmEnumTypeAttribute(NamespaceName="EntityFramework.TestApp", Name="TestEnum")]
     [DataContractAttribute()]
-    public enum TestEnum_ : int
+    public enum TestEnum : int
     {
         /// <summary>
         /// No Metadata Documentation available.
@@ -260,6 +262,7 @@ namespace EntityFramework.TestApp
 					partial void
 					OnContextCreated()
 					{
+						LoadExternalTypes();
 						OnBeforeDbEncodingSet();
 						if(dbEncoding == null) {
 							dbEncoding = OL.Core.EncodingExtensions.GetEncoding(Connection.GetCodePage());
@@ -267,6 +270,9 @@ namespace EntityFramework.TestApp
 						OnAfterDbEncodingSet();
 						OnAfterContextCreated();
 					}
+
+					partial void
+					LoadExternalTypes();
 
 					partial void
 					OnBeforeDbEncodingSet();

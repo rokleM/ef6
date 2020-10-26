@@ -1,13 +1,9 @@
 namespace EntityFramework.DB.Autogen
 {
-	using EntityFramework.External;
 	using OL.Core;
-	using OL.Core.Linq;
-	using OL.EFToolkit;
 	using OL.EFToolkit.Metadata.Autogen;
-	using System;
-	using System.Linq;
 	using System.Xml.Linq;
+	using EntityFramework.External;
 
 	public class UpdateModelMetadata : OL.EFToolkit.Metadata.Autogen.UpdateModelMetadata
 	{
@@ -61,46 +57,6 @@ namespace EntityFramework.DB.Autogen
 
 			RenameDeclarations(document);
 			UpdateConceptualComputedProperties(document);
-		}
-
-		void
-		UpdateEnumDeclarations(XDocument document, Type[] enumTypes, Type[] externalEnumTypes = null)
-		{
-			externalEnumTypes        ??= Array.Empty<Type>();
-			var externalEnumTypesSet   = externalEnumTypes.ToHashSet();
-			var existingEnumTypes      = enumTypes.Concat(externalEnumTypes).Join(document.EnumTypes(), et => et.Name, et => et.Name(), (et, _) => et);
-			var missingEnumTypes       = enumTypes.Concat(externalEnumTypes).Except(existingEnumTypes);
-
-			if(missingEnumTypes.Any()) {
-				var schema = document.Schema();
-				var ns     = schema.Name.Namespace;
-				foreach(var enumType in missingEnumTypes) {
-					var type = enumType;
-					schema.Add(
-						new XElement(
-							ns + "EnumType",
-							new object[] {
-								new XAttribute("Name",           type.Name),
-								new XAttribute("IsFlags",        type.GetCustomAttributes(typeof(FlagsAttribute), true).Length == 1),
-								new XAttribute("UnderlyingType", type.GetEnumUnderlyingType().Name),
-								externalEnumTypesSet.Contains(enumType)
-								?	new XAttribute(Edm.CodeGeneration + "ExternalTypeName", type.AssemblyQualifiedName)
-								:	default
-								,
-								Enum
-									.GetValues(type)
-									.OfType<object>()
-									.Select(v => new { Name = Enum.GetName(type, v), Value = Convert.ToInt64(v) })
-									.Select(a => new XElement(ns + "Member",
-										new XAttribute("Name", a.Name),
-										new XAttribute("Value", a.Value)
-									))
-							}
-							.ExceptNull()
-						)
-					);
-				}
-			}
 		}
 
 		static void

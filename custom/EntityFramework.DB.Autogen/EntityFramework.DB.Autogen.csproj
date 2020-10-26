@@ -6,15 +6,14 @@
 		<SignAssembly>false</SignAssembly>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="OL.EFToolkit.Metadata.Autogen" Version="20.10.3108.4389" />
+		<PackageReference Include="OL.EFToolkit.Metadata.Autogen" Version="20.10.3115.4398" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="..\EntityFramework.DB\Model.*" Visible="false" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\EntityFramework.External\EntityFramework.External.csproj" />
+		<Compile Include="..\EntityFramework.External\*.cs"/>
 	</ItemGroup>
-	<Import Project="$(MSBuildExtensionsPath)\MSBuildOdysseyTasks\MSBuild.Odyssey.Tasks.targets"/>
 	<Target Name="ProjectAfterBuild" AfterTargets="AfterBuild" Condition="'$(_AssemblyTimestampBeforeCompile)'!='$(_AssemblyTimestampAfterCompile)'">
 		<RunBuildTasks Assembly="$(TargetPath)" Files="@(EmbeddedResource)" />
 	</Target>

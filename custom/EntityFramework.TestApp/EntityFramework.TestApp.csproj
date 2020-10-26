@@ -13,7 +13,7 @@
 		<ProjectReference Include="..\EntityFramework.DB\EntityFramework.DB.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="OL.Core" Version="20.10.3108.4389" />
+		<PackageReference Include="OL.Core" Version="20.10.3115.4398" />
 	</ItemGroup>
 
 </Project>

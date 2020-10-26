@@ -15,5 +15,4 @@
     <EmbeddedResource Include="Model.msl" />
     <EmbeddedResource Include="Model.ssdl" />
   </ItemGroup>
-
 </Project>
